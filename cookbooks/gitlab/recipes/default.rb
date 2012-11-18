@@ -226,11 +226,22 @@ link "#{node['gitlab']['app_home']}/config/database.yml" do
   link_type :hard
 end
 
+
+
+gem_package "bundle" do
+
+
+gem_binary("/usr/local/ruby/#{node['gitlab']['install_ruby']}/bin/gem")
+
+end
+
+
+
 # Install Gems with bundle install
 execute "gitlab-bundle-install" do
   #command "export PATH=/usr/local/ruby/1.9.2-p290/bin:$PATH; bundle install --without development test --deployment"
   #command "source /etc/profile.d/gitlab.sh ; bundle install --without development test postgres --deployment"
-  command " export PATH=/usr/local/ruby/1.9.2-p290/bin:$PATH ; bundle install --without development test postgres --deployment"
+  command " export PATH=/usr/local/ruby/#{node['gitlab']['install_ruby']}/bin:$PATH ; bundle install --without development test postgres --deployment"
   cwd node['gitlab']['app_home']
   user node['gitlab']['user']
   group node['gitlab']['group']
@@ -242,7 +253,7 @@ end
 execute "gitlab-bundle-rake" do
   #command "export PATH=/usr/local/ruby/1.9.2-p290/bin:$PATH; bundle exec rake gitlab:app:setup RAILS_ENV=production"
   #command " source /etc/profile.d/gitlab.sh ; bundle exec rake gitlab:app:setup RAILS_ENV=production"
-  command " export PATH=/usr/local/ruby/1.9.2-p290/bin:$PATH ; bundle exec rake gitlab:app:setup RAILS_ENV=production"
+  command " export PATH=/usr/local/ruby/#{node['gitlab']['install_ruby']}/bin:$PATH ; bundle exec rake gitlab:app:setup RAILS_ENV=production"
   cwd node['gitlab']['app_home']
   user node['gitlab']['user'] 
   group node['gitlab']['group']
