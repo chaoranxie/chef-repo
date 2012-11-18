@@ -1,0 +1,18 @@
+
+
+site "http://community.opscode.com/api/v1"
+
+
+cookbook "yumrepo"
+cookbook "ruby_build"
+cookbook "git"
+cookbook "gitlab"
+cookbook "redisio"
+cookbook "build-essential"
+cookbook "python"
+cookbook "readline"
+cookbook "sudo"
+cookbook "openssh"
+cookbook "perl"
+cookbook "xml"
+cookbook "zlib"
